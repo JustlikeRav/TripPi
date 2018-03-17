@@ -9,6 +9,9 @@ import urllib2, urllib
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
+
+def print_data(lat,lng,temp):
+	print "Latitude: " + lat + " | Longitude: " + lon + " | Temperature: " + temp)
  
 def read_temp_raw():
     f = open(device_file, 'r')
@@ -48,8 +51,8 @@ while x == 0:
        if fix > 1:
           lat = " " + gps[18:20] + "." + gps[20:22] + "." + gps[23:27] + gps[28:29]
           lon = " " + gps[30:33] + "." + gps[33:35] + "." + gps[36:40] + gps[41:42]
-          print "Latitude: " + lat + " | Longitude: " + lon + " | Temperature: " + str(read_temp())	
+		  print_data(lat,lng,str(read_temp())
        else:
-          lat = " No Valid Data "
-          lon = " No Valid Data"
-          print "Latitude: " + lat + " | Longitude: " + lon + " | Temperature: " + str(read_temp())
+          lat = "No Valid Data"
+          lon = "No Valid Data"
+		  print_data(lat,lng,str(read_temp())
