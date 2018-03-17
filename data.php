@@ -11,7 +11,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "INSERT INTO data (lat, lng, temp) VALUES ('$_POST[\'lat\']', '$_POST[\'lon\']', '$_POST[\'temp\']')";
+$sql = "INSERT INTO data (lat, lng, temp) VALUES ('".$_POST['lat']."', '".$_POST['lon']."', '".$_POST['temp']."')";
 echo $sql;
 
 if ($conn->query($sql) === TRUE) {
