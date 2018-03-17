@@ -7,7 +7,7 @@ echo $_POST['temp'];
 
 $servername = "localhost";
 $username = "justlik6_travel";
-$password = "4[9_56eT0Es@";
+$password = "X#HLBV%9zBm?";
 $dbname = "justlik6_trippie";
 
 // Create connection
@@ -17,8 +17,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "INSERT INTO data (lat, lng, temp)
-VALUES ($_POST['lat'], $_POST['lon'], $_POST['temp'])";
+$sql = "INSERT INTO data (lat, lng, temp) VALUES (" + $_POST['lat'] + "," +  $_POST['lon'] + "," + $_POST['temp'] + ")";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
