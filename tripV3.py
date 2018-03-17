@@ -54,24 +54,8 @@ while x == 0:
        if fix > 1:
           lat = " " + gps[18:20] + "." + gps[20:22] + "." + gps[23:27] + gps[28:29]
           lon = " " + gps[30:33] + "." + gps[33:35] + "." + gps[36:40] + gps[41:42]
-<<<<<<< HEAD
-<<<<<<< HEAD
-		  print_data(lat,lng,str(read_temp()))
-       else:
-          lat = "No Valid Data"
-          lon = "No Valid Data"
-		  print_data(lat,lng,str(read_temp()))
-=======
 	  print_data(lat,lon,str(read_temp()))
        else:
           lat = "No Valid Data"
           lon = "No Valid Data"
 	  print_data(lat,lon,str(read_temp()))
->>>>>>> 3352ccb7f4aba74b96d73126abb77c65b1904420
-=======
-	  print_data(lat,lon,str(read_temp()))
-       else:
-          lat = "No Valid Data"
-          lon = "No Valid Data"
-	  print_data(lat,lon,str(read_temp()))
->>>>>>> 3352ccb7f4aba74b96d73126abb77c65b1904420
