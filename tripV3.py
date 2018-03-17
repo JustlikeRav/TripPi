@@ -62,6 +62,6 @@ while x == 0:
           lon = " " + gps[30:33] + "." + gps[33:35] + "." + gps[36:40] + gps[41:42]
 	  print_data(lat,lon,str(read_temp()))
        else:
-          lat = "No Valid Data"
-          lon = "No Valid Data"
+          lat = "-1"
+          lon = "-1"
 	  print_data(lat,lon,str(read_temp()))
