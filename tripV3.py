@@ -67,4 +67,8 @@ while x == 0:
        else:
           lat = -1
           lon = -1
+<<<<<<< HEAD
 	  print_data(str(lat),str(lon),str(read_temp()))
+=======
+	  print_data(str(lat),str(lon),str(read_temp()))
+>>>>>>> e09cc2e50d436b711064929e3b75784162b7deb3
