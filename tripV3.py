@@ -14,7 +14,7 @@ def save_data(lat,lng,temp):
     #Save To Database
     mydata=[('lat',lat),('lon',lng),('temp',temp)]
     mydata=urllib.urlencode(mydata)
-    path='http://www.justlikerav.com/trippie/data.php'
+    path='http://www.justlikerav.com/trippie/write_data.php'
     req=urllib2.Request(path, mydata)
     req.add_header("Content-type", "application/x-www-form-urlencoded")
     page=urllib2.urlopen(req).read()
