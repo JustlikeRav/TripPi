@@ -10,13 +10,11 @@ base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
 
-def print_data(lat,lng,temp):
-    print "Latitude: " + lat + " | Longitude: " + lng + " | Temperature: " + temp
-    
+def save_data(lat,lng,temp):
     #Save To Database
-    mydata=[('lat',lat),('lon',lng),('temp',temp)]    #The first is the var name the second is the value
+    mydata=[('lat',lat),('lon',lng),('temp',temp)]
     mydata=urllib.urlencode(mydata)
-    path='http://www.justlikerav.com/trippie/data.php'    #the url you want to POST to
+    path='http://www.justlikerav.com/trippie/data.php'
     req=urllib2.Request(path, mydata)
     req.add_header("Content-type", "application/x-www-form-urlencoded")
     page=urllib2.urlopen(req).read()
@@ -57,15 +55,18 @@ x = 0
 while x == 0:
    gps = ser.readline()
 
-   if gps[1:6] == "GPGSA":
+	if gps[1:6] == "GPGSA":
       fix = int(gps[9:10])
-   if gps[1 : 6] == "GPGGA":
-
+	if gps[1 : 6] == "GPGGA":
+	lambda lat,lon
+	temp = str(read_temp())
        if fix > 1:
-          lat = CoordinateToDouble(float(gps[18:20]), float(gps[20:22]), float(gps[23:27]), gps[28:29])
-          lon = CoordinateToDouble(float(gps[30:33]), float(gps[33:35]), float(gps[36:40]), gps[41:42])
-	  print_data(str(lat),str(lon),str(read_temp()))
+          lat = str(CoordinateToDouble(float(gps[18:20]), float(gps[20:22]), float(gps[23:27]), gps[28:29]))
+          lon = str(CoordinateToDouble(float(gps[30:33]), float(gps[33:35]), float(gps[36:40]), gps[41:42]))
+		  save_data(lat,lon,read_temp())
        else:
-          lat = -1
-          lon = -1
-	  print_data(str(lat),str(lon),str(read_temp()))
+          lat = "NULL"
+          lon = "NULL"
+		  
+	print "Latitude: " + lat + " | Longitude: " + lng + " | Temperature: " + temp
+
