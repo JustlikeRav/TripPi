@@ -62,7 +62,7 @@ while x == 0:
         if fix > 1:
             lat = str(CoordinateToDouble(float(gps[18:20]), float(gps[20:22]), float(gps[23:27]), gps[28:29]))
             lon = str(CoordinateToDouble(float(gps[30:33]), float(gps[33:35]), float(gps[36:40]), gps[41:42]))
-    	    save_data(lat,lon,read_temp())
+            save_data(lat,lon,temp)
         else:
             lat = "NULL"
             lon = "NULL"
