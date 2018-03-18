@@ -22,8 +22,12 @@ def print_data(lat,lng,temp):
     page=urllib2.urlopen(req).read()
     print page
 	
-def CoordinateToDouble(hours, minutes, seconds, NEWS)
-	print hours + " " + minutes + " " + seconds + " " + NEWS
+def CoordinateToDouble(hours, minutes, seconds, NEWS):
+    seconds = (seconds / 6000)%1
+    minutes = (minutes + seconds)/60
+    hours = minutes + hours
+    if NEWS == "W" or NEWS == "S": return hours*-1
+    else: return hours
  
 def read_temp_raw():
     f = open(device_file, 'r')
@@ -61,10 +65,10 @@ while x == 0:
    if gps[1 : 6] == "GPGGA":
 
        if fix > 1:
-          lat = CoordinateToDouble(gps[18:20], gps[20:22], gps[23:27], gps[28:29])
-          lon = CoordinateToDouble(gps[30:33], gps[33:35], gps[36:40], gps[41:42])
-	  print_data(str(lat),str(lon),str(read_temp()))
+          lat = CoordinateToDouble(float(gps[18:20]), float(gps[20:22]), float(gps[23:27]), gps[28:29])
+          lon = CoordinateToDouble(float(gps[30:33]), float(gps[33:35]), float(gps[36:40]), gps[41:42])
+	  #print_data(str(lat),str(lon),str(read_temp()))
        else:
           lat = -1
           lon = -1
-	  print_data(str(lat),str(lon),str(read_temp()))
+	  #print_data(str(lat),str(lon),str(read_temp()))
