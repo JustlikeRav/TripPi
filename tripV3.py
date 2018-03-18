@@ -23,11 +23,8 @@ def print_data(lat,lng,temp):
     print page
 	
 def CoordinateToDouble(hours, minutes, seconds, NEWS):
-    seconds = (seconds / 6000)%1
-    minutes = (minutes + seconds)/60
-    hours = minutes + hours
-    if NEWS == "W" or NEWS == "S": return hours*-1
-    else: return hours
+    if NEWS == "W" or NEWS == "S": return (((minutes + ((seconds / 6000)%1))/60) + hours)*-1
+    else: return ((minutes + ((seconds / 6000)%1))/60) + hours
  
 def read_temp_raw():
     f = open(device_file, 'r')
@@ -67,8 +64,8 @@ while x == 0:
        if fix > 1:
           lat = CoordinateToDouble(float(gps[18:20]), float(gps[20:22]), float(gps[23:27]), gps[28:29])
           lon = CoordinateToDouble(float(gps[30:33]), float(gps[33:35]), float(gps[36:40]), gps[41:42])
-	  #print_data(str(lat),str(lon),str(read_temp()))
+	  print_data(str(lat),str(lon),str(read_temp()))
        else:
           lat = -1
           lon = -1
-	  #print_data(str(lat),str(lon),str(read_temp()))
+	  print_data(str(lat),str(lon),str(read_temp()))
