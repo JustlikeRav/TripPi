@@ -5,6 +5,7 @@ import time
 import serial
 import urllib2, urllib
 import RPi.GPIO as GPIO
+import thread
 
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
