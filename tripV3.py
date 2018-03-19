@@ -2,7 +2,6 @@ import os
 import glob
 import pygame, sys
 import time
-from time import *
 import serial
 import urllib2, urllib
 import RPi.GPIO as GPIO
@@ -97,9 +96,9 @@ fix = 1
 x = 0
 
 backwards(int(2) / 1000.0, int(128))
-#time.sleep(15)
+time.sleep(15)
 forward(int(2) / 1000.0, int(128))
-#time.sleep(15)
+time.sleep(15)
 
 while x == 0:
     gps = ser.readline()
