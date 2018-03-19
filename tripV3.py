@@ -11,6 +11,20 @@ base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
 
+GPIO.setmode(GPIO.BCM)
+
+enable_pin = 13
+coil_A_1_pin = 20
+coil_A_2_pin = 21
+coil_B_1_pin = 19
+coil_B_2_pin = 26
+
+GPIO.setup(enable_pin, GPIO.OUT)
+GPIO.setup(coil_A_1_pin, GPIO.OUT)
+GPIO.setup(coil_A_2_pin, GPIO.OUT)
+GPIO.setup(coil_B_1_pin, GPIO.OUT)
+GPIO.setup(coil_B_2_pin, GPIO.OUT)
+
 def save_data(lat,lng,temp):
     #Save To Database
     mydata=[('lat',lat),('lon',lng),('temp',temp)]
