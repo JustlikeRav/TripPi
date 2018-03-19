@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "justlik6_travel";
-$password = "X#HLBV%9zBm?";
+$password = " ";
 $dbname = "justlik6_trippie";
 
 $sql = "SELECT * FROM data ORDER BY data_id DESC LIMIT 1";
