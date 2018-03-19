@@ -53,6 +53,16 @@ def setStep(w1, w2, w3, w4):
   GPIO.output(coil_A_2_pin, w2)
   GPIO.output(coil_B_1_pin, w3)
   GPIO.output(coil_B_2_pin, w4)
+  
+def start_motor_thread(Status):
+	print Status
+	while True:
+		print "Opening Motor"
+		backwards(int(2) / 1000.0, int(128))
+		time.sleep(15)
+		print "Closing Motor"
+		forward(int(2) / 1000.0, int(128))
+		time.sleep(15)
 
 def save_data(lat,lng,temp):
     #Save To Database
@@ -95,10 +105,11 @@ ser = serial.Serial('/dev/ttyUSB0',4800,timeout = None)
 fix = 1
 x = 0
 
-backwards(int(2) / 1000.0, int(128))
-time.sleep(15)
-forward(int(2) / 1000.0, int(128))
-time.sleep(15)
+#Motor Start thread
+try:
+   thread.start_new_thread( start_motor_thread, ("Motor Started") )
+except:
+   print "Error: unable to start thread"
 
 while x == 0:
     gps = ser.readline()
