@@ -25,6 +25,8 @@ GPIO.setup(coil_A_2_pin, GPIO.OUT)
 GPIO.setup(coil_B_1_pin, GPIO.OUT)
 GPIO.setup(coil_B_2_pin, GPIO.OUT)
 
+GPIO.output(enable_pin, 1)
+
 def save_data(lat,lng,temp):
     #Save To Database
     mydata=[('lat',lat),('lon',lng),('temp',temp)]
