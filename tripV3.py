@@ -27,27 +27,27 @@ GPIO.setup(coil_B_2_pin, GPIO.OUT)
 
 GPIO.output(enable_pin, 1)
 
-def forward(delay, steps):
+def forward(steps):
   for i in range(0, steps):
     setStep(1, 0, 1, 0)
-    time.sleep(delay)
+    time.sleep(.002)
     setStep(0, 1, 1, 0)
-    time.sleep(delay)
+    time.sleep(.002)
     setStep(0, 1, 0, 1)
-    time.sleep(delay)
+    time.sleep(.002)
     setStep(1, 0, 0, 1)
-    time.sleep(delay)
+    time.sleep(.002)
 
-def backwards(delay, steps):
+def backwards(steps):
   for i in range(0, steps):
     setStep(1, 0, 0, 1)
-    time.sleep(delay)
+    time.sleep(.002)
     setStep(0, 1, 0, 1)
-    time.sleep(delay)
+    time.sleep(.002)
     setStep(0, 1, 1, 0)
-    time.sleep(delay)
+    time.sleep(.002)
     setStep(1, 0, 1, 0)
-    time.sleep(delay)
+    time.sleep(.002)
 
 def setStep(w1, w2, w3, w4):
 	GPIO.output(coil_A_1_pin, w1)
@@ -59,8 +59,14 @@ def my_round(x):
 	return round(x*4)/4
   
 def rotateMotor(temp_init, temp_final):
-	temp_dif = round(temp_final - temp_init);
-	print "\n\t" + str(temp_dif);
+	temp_dif = round(temp_final - temp_init)
+	if temp_dif < 0:
+		temp_dif *= -1
+		steps = temp_dif * 4
+		backwards(steps)
+	else:
+		steps = temp_dif * 4
+		forward(steps)
 
 def save_data(lat,lng,temp):
     #Save To Database
