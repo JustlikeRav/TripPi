@@ -50,20 +50,17 @@ def backwards(delay, steps):
     time.sleep(delay)
 
 def setStep(w1, w2, w3, w4):
-  GPIO.output(coil_A_1_pin, w1)
-  GPIO.output(coil_A_2_pin, w2)
-  GPIO.output(coil_B_1_pin, w3)
-  GPIO.output(coil_B_2_pin, w4)
+	GPIO.output(coil_A_1_pin, w1)
+	GPIO.output(coil_A_2_pin, w2)
+	GPIO.output(coil_B_1_pin, w3)
+	GPIO.output(coil_B_2_pin, w4)
+	
+def my_round(x):
+	return round(x*4)/4
   
-def start_motor_thread(Status):
-	print Status
-	while True:
-		print "Opening Motor"
-		backwards(int(2) / 1000.0, int(128))
-		time.sleep(15)
-		print "Closing Motor"
-		forward(int(2) / 1000.0, int(128))
-		time.sleep(15)
+def rotateMotor(temp_init, temp_final):
+	temp_dif = round(temp_final - temp_init);
+	print "\n\t" + str(temp_dif);
 
 def save_data(lat,lng,temp):
     #Save To Database
@@ -106,11 +103,8 @@ ser = serial.Serial('/dev/ttyUSB0',4800,timeout = None)
 fix = 1
 x = 0
 
-#Motor Start thread
-try:
-   thread.start_new_thread( start_motor_thread, ("Motor Started") )
-except:
-   print "Error: unable to start thread"
+#set the scale
+rotateMotor(0, read_temp())
 
 while x == 0:
     gps = ser.readline()
