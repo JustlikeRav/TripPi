@@ -64,10 +64,10 @@ def rotateMotor(temp_init, temp_final):
 	temp_dif = round(temp_final - temp_init)
 	if temp_dif < 0:
 		temp_dif *= -1
-		steps = temp_dif * 4
+		steps = int(temp_dif * 4)
 		backwards(steps)
 	else:
-		steps = temp_dif * 4
+		steps = int(temp_dif * 4)
 		forward(steps)
 
 def save_data(lat,lng,temp):
