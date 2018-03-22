@@ -28,26 +28,28 @@ GPIO.setup(coil_B_2_pin, GPIO.OUT)
 GPIO.output(enable_pin, 1)
 
 def forward(steps):
+  delay = int(2)/1000
   for i in range(0, steps):
     setStep(1, 0, 1, 0)
-    time.sleep(.002)
+    time.sleep(delay)
     setStep(0, 1, 1, 0)
-    time.sleep(.002)
+    time.sleep(delay)
     setStep(0, 1, 0, 1)
-    time.sleep(.002)
+    time.sleep(delay)
     setStep(1, 0, 0, 1)
-    time.sleep(.002)
+    time.sleep(delay)
 
 def backwards(steps):
+  delay = int(2)/1000
   for i in range(0, steps):
     setStep(1, 0, 0, 1)
-    time.sleep(.002)
+    time.sleep(delay)
     setStep(0, 1, 0, 1)
-    time.sleep(.002)
+    time.sleep(delay)
     setStep(0, 1, 1, 0)
-    time.sleep(.002)
+    time.sleep(delay)
     setStep(1, 0, 1, 0)
-    time.sleep(.002)
+    time.sleep(delay)
 
 def setStep(w1, w2, w3, w4):
 	GPIO.output(coil_A_1_pin, w1)
