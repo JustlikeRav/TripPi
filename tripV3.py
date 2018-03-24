@@ -13,7 +13,7 @@ device_file = device_folder + '/w1_slave'
 
 GPIO.setmode(GPIO.BCM)
 
-enable_pin = 13
+enable_pin = 25
 coil_A_1_pin = 20
 coil_A_2_pin = 21
 coil_B_1_pin = 19
@@ -28,8 +28,9 @@ GPIO.setup(coil_B_2_pin, GPIO.OUT)
 GPIO.output(enable_pin, 1)
 
 def forward(steps):
-  delay = int(2)/1000
+  delay = 0.002
   for i in range(0, steps):
+    print "\nDICK\n"
     setStep(1, 0, 1, 0)
     time.sleep(delay)
     setStep(0, 1, 1, 0)
@@ -40,8 +41,9 @@ def forward(steps):
     time.sleep(delay)
 
 def backwards(steps):
-  delay = int(2)/1000
+  delay = 0.002
   for i in range(0, steps):
+    print "\nDICK\n"
     setStep(1, 0, 0, 1)
     time.sleep(delay)
     setStep(0, 1, 0, 1)
@@ -61,7 +63,7 @@ def my_round(x):
 	return round(x*4)/4
   
 def rotateMotor(temp_init, temp_final):
-	temp_dif = round(temp_final - temp_init)
+	temp_dif = my_round(temp_final - temp_init)
 	if temp_dif < 0:
 		temp_dif *= -1
 		steps = int(temp_dif * 4)
@@ -110,9 +112,9 @@ def read_temp():
 ser = serial.Serial('/dev/ttyUSB0',4800,timeout = None)
 fix = 1
 x = 0
-oldTemp = 0;
+
 #set the scale
-rotateMotor(oldTemp, read_temp())
+rotateMotor(0, read_temp())
 oldTemp = read_temp()
 while x == 0:
     gps = ser.readline()
@@ -128,6 +130,9 @@ while x == 0:
         else:
             lat = "NULL"
             lon = "NULL"
-		  
-	
-	print "Latitude: " + lat + " | Longitude: " + lon + " | Temperature: " + str(newTemp) + " | Tempdiff: " + str(newTemp-oldTemp)
+        
+	print "Latitude: " + lat + " | Longitude: " + lon + " | Temperature: " + str(newTemp)
+	if my_round(newTemp-oldTemp) != 0:
+            print "\n\t | Tempdiff: " + str(my_round(newTemp-oldTemp))
+            rotateMotor(oldTemp, newTemp)
+            oldTemp = newTemp;
