@@ -29,8 +29,8 @@ GPIO.output(enable_pin, 1)
 
 def forward(steps):
   delay = 0.002
+  print "\nRotating fowards\n"
   for i in range(0, steps):
-    print "\nDICK\n"
     setStep(1, 0, 1, 0)
     time.sleep(delay)
     setStep(0, 1, 1, 0)
@@ -42,8 +42,8 @@ def forward(steps):
 
 def backwards(steps):
   delay = 0.002
+  print "\nRotating Backwards\n"
   for i in range(0, steps):
-    print "\nDICK\n"
     setStep(1, 0, 0, 1)
     time.sleep(delay)
     setStep(0, 1, 0, 1)
